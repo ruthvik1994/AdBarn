@@ -3,3 +3,4 @@ Client/node_modules/*
 node_modules/*
 Client/dist/*
 .vscode/*
+.idea
