@@ -5,15 +5,15 @@ export default class videoService {
     }
 
     updateViewedList(obj) {
-        return this.http.post('https://afternoon-cliffs-24932.herokuapp.com/user/viewed', obj);
+        return this.http.post('https://ad-barn-backend.herokuapp.com/user/viewed', obj);
     }
 
     getVideo(id) {
-        return this.http.get(`https://afternoon-cliffs-24932.herokuapp.com/fetch/${id}`);
+        return this.http.get(`https://ad-barn-backend.herokuapp.com/fetch/${id}`);
     }
 
     searchVideos(tags) {
-        return this.http.post(`https://afternoon-cliffs-24932.herokuapp.com/user/search`, tags);
+        return this.http.post(`https://ad-barn-backend.herokuapp.com/user/search`, tags);
     }
 }
 

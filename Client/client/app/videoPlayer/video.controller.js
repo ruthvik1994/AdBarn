@@ -1,5 +1,5 @@
 'use strict';
-const baseUrl = 'https://afternoon-cliffs-24932.herokuapp.com/user/fetch/';
+const baseUrl = 'https://ad-barn-backend.herokuapp.com/user/fetch/';
 export default class userCtrl {
     constructor($sce, $stateParams, videoService, userService) {
         this.$sce = $sce;

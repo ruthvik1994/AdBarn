@@ -17,19 +17,19 @@ export default class loginService {
     }
 
     addComment(obj) {
-        return this.http.post('https://afternoon-cliffs-24932.herokuapp.com/user/comments', obj);
+        return this.http.post('https://ad-barn-backend.herokuapp.com/user/comments', obj);
     }
 
     getUserCoins(username) {
-        return this.http.get(`https://afternoon-cliffs-24932.herokuapp.com/user/coins/${username}`);
+        return this.http.get(`https://ad-barn-backend.herokuapp.com/user/coins/${username}`);
     }
 
     claimCoins(username) {
-        return this.http.post('https://afternoon-cliffs-24932.herokuapp.com/user/redeem/', {username:username});
+        return this.http.post('https://ad-barn-backend.herokuapp.com/user/redeem/', {username:username});
     }
 
     getViewedHistory(id) {
-        return this/http/get(`https://afternoon-cliffs-24932.herokuapp.com/user/history/${id}`);
+        return this/http/get(`https://ad-barn-backend.herokuapp.com/user/history/${id}`);
     }
 }
 
