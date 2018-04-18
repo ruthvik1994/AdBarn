@@ -10,6 +10,9 @@ var userSchema = new Schema({
     time: Number, 
     videosViewed: [{
         videoId: Number
+    }],
+    videosLiked: [{
+        videoId: Number
     }]
 });
 

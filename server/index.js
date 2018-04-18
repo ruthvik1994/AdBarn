@@ -69,7 +69,8 @@ app.put('/signup', function (req, res) {
                             'password': req.body.password,
                             'coins': 0,
                             'time': 0,
-                            'videosViewed': []
+                            'videosViewed': [],
+                            'videosLiked': []
                         };
 
                         let user = new account_model(record);
