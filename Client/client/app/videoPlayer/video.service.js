@@ -9,7 +9,7 @@ export default class videoService {
     }
 
     likeVideo(obj) {
-        return this.http.post('http://localhost:3000/user/like', obj);
+        return this.http.post('https://ad-barn-backend.herokuapp.com/user/like', obj);
     }
 
     getVideo(id) {
