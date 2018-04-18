@@ -45,7 +45,8 @@
                                     <div class="row" style="margin-top:10px; margin-left: 10px">
                                                         <strong style="font-size: 20px">{{vm.videoname}}</strong>
                                                         <br>
-                                                        <p style="font-size: 15px">{{vm.videoview}} Views</p>
+                                                        <p style="font-size: 15px">{{vm.videoview}} Views {{vm.likes}} Likes</p>
+                                                        <p><button ng-click="vm.onLike()">Like</button></p>
                                         </div>
 
                                     <div class="row" style="margin-top:50px ">
@@ -83,7 +84,7 @@
                                     src="http://www.videogular.com/assets/images/videogular.png"> </a>
                             <div id="div1" class=" col-sm-9"><a ng-click="vm.onVideoChange(video)">{{video.title}}</a></div>
                             <span><div class="col-sm-4" ng-if="vm.currentVideo != {} && vm.videosList.length !== 0">
-                                    <div><p style="font-size: 10px">{{video.views}} Views</p></div>
+                                    <div><p style="font-size: 10px">{{video.views}} Views</p><p style="font-size: 10px">{{video.likes}} Likes</p></div>
                             </div></span>
                         </li>
                     </ul>

@@ -2,6 +2,7 @@
 const baseUrl = 'https://ad-barn-backend.herokuapp.com/user/fetch/';
 export default class userCtrl {
     constructor($sce, $stateParams, videoService, userService) {
+        console.log('videoController');
         this.$sce = $sce;
         this.$stateParams = $stateParams;
         this.videoService = videoService;
@@ -11,6 +12,7 @@ export default class userCtrl {
         this.newComment = '';
         this.videoname = '';
         this.videoview = '';
+        this.likes = '';
     }
     
     $onInit() {
@@ -21,6 +23,7 @@ export default class userCtrl {
         this.comments = _.get(currentVideo, 'comments', []);
         this.videoname = _.get(currentVideo, 'title');
         this.videoview = _.get(currentVideo, 'views');
+        this.likes = _.get(currentVideo, 'likes');
             this.config.theme = 'node_modules/videogular-themes-default/videogular.css';
             this.config.plugins = {
                 poster: 'http://www.videogular.com/assets/images/videogular.png'
@@ -29,6 +32,13 @@ export default class userCtrl {
 
     onPlayerReady(API) {
         this.api = API;
+    }
+
+    onLike() {
+        this.videoService.likeVideo({
+            videoId: this.currentVideoId,
+            userId: this.$stateParams.id
+        });
     }
 
     onCommentType(event) {
@@ -49,6 +59,7 @@ export default class userCtrl {
         this.currentVideoId = _.get(video, 'videoId');
         this.videoname = _.get(video, 'title');
         this.videoview = _.get(video, 'views');
+        this.likes = _.get(video, 'likes');
         this.comments = _.get(_.first(_.filter(this.videosList, (eachVideo) => {
             return eachVideo.videoId === video.videoId;
         })), 'comments', []);

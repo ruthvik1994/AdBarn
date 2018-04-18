@@ -34,8 +34,8 @@ router.get('/', function (req, res) {
     });
 });
 
-router.post('/like/:id', function (req, res) {
-    Video.findOne({ 'videoId': req.params.id }, function (err, video) {
+router.post('/like', function (req, res) {
+    Video.findOne({ 'videoId': req.body.videoId }, function (err, video) {
         if (err) {
             res.status(400).send(err);
         } else {
