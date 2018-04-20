@@ -31,6 +31,10 @@ export default class loginService {
     getViewedHistory(id) {
         return this/http/get(`https://ad-barn-backend.herokuapp.com/user/history/${id}`);
     }
+
+    getAllUserInfo(id) {
+        return this.http.get(`http://localhost:3000/user/getAllUserInfo/${id}`);
+    }
 }
 
 loginService.$inject = ['$http'];
