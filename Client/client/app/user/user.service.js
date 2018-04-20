@@ -33,7 +33,7 @@ export default class loginService {
     }
 
     getAllUserInfo(id) {
-        return this.http.get(`http://localhost:3000/user/getAllUserInfo/${id}`);
+        return this.http.get(`https://ad-barn-backend.herokuapp.com/user/getAllUserInfo/${id}`);
     }
 }
 
