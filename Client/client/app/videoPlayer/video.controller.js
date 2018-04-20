@@ -36,9 +36,9 @@ export default class userCtrl {
         this.videoview = _.get(currentVideo, 'views');
         this.likes = _.get(currentVideo, 'likes');
             this.config.theme = 'node_modules/videogular-themes-default/videogular.css';
-            this.config.plugins = {
-                poster: 'http://www.videogular.com/assets/images/videogular.png'
-            };
+            // this.config.plugins = {
+            //     poster: 'http://www.videogular.com/assets/images/videogular.png'
+            // };
 
         this.userService.getAllUserInfo(this.$stateParams.id).then((response) => {
             this.allUserInfo = response.data;
