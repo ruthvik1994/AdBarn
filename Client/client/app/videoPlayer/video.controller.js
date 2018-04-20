@@ -16,6 +16,14 @@ export default class userCtrl {
         this.likes = '';
         this.videosLiked = [];
         this.videoAlreadyLiked = false;
+
+        $(window).blur(() => {
+            this.api.pause();
+        });
+
+        $(window).focus(() => {
+            this.api.play();
+        });
     }
 
     $onInit() {
