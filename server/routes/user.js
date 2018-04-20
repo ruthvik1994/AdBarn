@@ -40,12 +40,59 @@ router.post('/like', function (req, res) {
             res.status(400).send(err);
         } else {
             if (video) {
-                video.likes = video.likes + 1;
-                video.save((err, video) => {
+                if(req.body.isLiking) {
+                    video.likes = video.likes + 1;
+                } else {
+                    video.likes = video.likes - 1;
+                }
+                video.save((err) => {
                     if (err) {
                         res.status(400).send(err);
                     } else {
-                        res.status(200).send('You Liked the video');
+                        User.findOne({ 'username': req.body.userId}, function(err, user) {
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                if(user) {
+
+                                    if(req.body.isLiking) {
+                                        user['videosLiked'].push({ videoId: req.body.videoId });
+                                        user.save((err) => {
+                                            if(err) {
+                                                res.status(400).send(err);
+                                            }else {
+                                                res.status(200).send('You Liked the video');
+                                            }
+                                        });
+                                    } else {
+                                        User.update(
+                                            {username: req.body.userId},
+                                            {$pull: {'videosLiked' : { 'videoId': req.body.videoId}}},
+                                            (err) => {
+                                                if(err) {
+                                                    res.status(400).send(err);
+                                                } else {
+                                                    user.save((err) => {
+                                                        if(err) {
+                                                            res.status(400).send(err);
+                                                        }else {
+                                                            res.status(200).send('You Liked the video');
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        );
+
+                                    }
+
+
+                                } else {
+                                    res.status(404).send('User not found');
+                                }
+                            }
+                        });
+
+
                     }
                 });
 
@@ -143,6 +190,16 @@ router.post('/viewed', function (req, res) {
 
 router.get('/coins/:username', function (req, res) {
     User.findOne({ 'username': req.params.username }, function (err, user) {
+        if (err) {
+            res.status(400).send(err);
+        } else {
+            res.status(200).send(user);
+        }
+    });
+});
+
+router.get('/getAllUserInfo/:username', function(req, res) {
+    User.findOne({'username': req.params.username}, function(err, user) {
         if (err) {
             res.status(400).send(err);
         } else {

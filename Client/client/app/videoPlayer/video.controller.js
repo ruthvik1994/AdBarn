@@ -8,13 +8,16 @@ export default class userCtrl {
         this.videoService = videoService;
         this.userService = userService;
         this.config = {};
+        this.allUserInfo = {};
         this.currentVideoId = '';
         this.newComment = '';
         this.videoname = '';
         this.videoview = '';
         this.likes = '';
+        this.videosLiked = [];
+        this.videoAlreadyLiked = false;
     }
-    
+
     $onInit() {
         this.videoIds = _.map(this.videosList, 'videoId');
         let currentVideo = (!_.isEmpty(this.videosList)) ? _.first(this.videosList) : {};
@@ -28,16 +31,38 @@ export default class userCtrl {
             this.config.plugins = {
                 poster: 'http://www.videogular.com/assets/images/videogular.png'
             };
+
+        this.userService.getAllUserInfo(this.$stateParams.id).then((response) => {
+            this.allUserInfo = response.data;
+            this.videosLiked = this.allUserInfo.videosLiked;
+            this.videoAlreadyLiked = _.includes(_.map(this.videosLiked, (video) => {return video.videoId}), this.currentVideoId);
+        });
+
     }
 
     onPlayerReady(API) {
         this.api = API;
     }
 
-    onLike() {
+    onLike(isLiking) {
         this.videoService.likeVideo({
             videoId: this.currentVideoId,
-            userId: this.$stateParams.id
+            userId: this.$stateParams.id,
+            isLiking: isLiking
+        }).then(() => {
+            if(isLiking) {
+                this.likes++;
+                this.videoAlreadyLiked = true;
+                _.find(this.videosList, (video) => {
+                    return video.videoId === this.currentVideoId
+                })['likes']++;
+            } else {
+                this.likes--;
+                this.videoAlreadyLiked = false;
+                _.find(this.videosList, (video) => {
+                    return video.videoId === this.currentVideoId
+                })['likes']--;
+            }
         });
     }
 
